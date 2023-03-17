@@ -22,12 +22,19 @@ class Category(MPTTModel):
         ordering = ('-id',)
 
     class MPTTMeta:
-        order_insertion_by = ['name']
+        order_insertion_by = ['title']
+
+    def __str__(self):
+        return self.title
 
 
 class Tag(MPTTModel):
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255)
+
+    class Meta:
+        verbose_name = 'Тэг'
+        verbose_name_plural = 'Тэги'
 
 
 class Post(models.Model):
@@ -70,7 +77,44 @@ class Post(models.Model):
     )
 
     class Meta:
+        verbose_name = 'Пост'
+        verbose_name_plural = 'Посты'
         ordering = ('-publish',)
 
     def __str__(self):
         return self.title
+
+
+class Product(models.Model):
+    title = models.CharField(
+        max_length=255,
+        verbose_name='Название товара'
+    )
+   # image = models.ImageField(
+   #     upload_to='articles/',
+    #    verbose_name='Изображение'
+    #)
+    price = models.DecimalField(
+        decimal_places=2,
+        max_digits=10
+    )#
+    body = models.TextField()
+
+    class Meta:
+        verbose_name = 'Товар'
+        verbose_name_plural = 'Товары'
+        db_table = 'product'
+
+    def __str__(self):
+        return self.title
+
+
+class Comment(models.Model):
+    name = models.CharField(max_length=150)
+    body = models.TextField(max_length=300)
+    date_time = models.DateTimeField(auto_now_add=True)
+    product = models.ForeignKey(
+        Product,
+        related_name='comment',
+        on_delete=models.CASCADE
+    )
