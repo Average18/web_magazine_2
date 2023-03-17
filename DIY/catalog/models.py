@@ -28,13 +28,16 @@ class Category(MPTTModel):
         return self.title
 
 
-class Tag(MPTTModel):
+class Tag(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255)
 
     class Meta:
         verbose_name = 'Тэг'
         verbose_name_plural = 'Тэги'
+
+    def __str__(self):
+        return self.title
 
 
 class Post(models.Model):
