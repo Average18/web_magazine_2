@@ -6,7 +6,6 @@ from mptt.models import MPTTModel, TreeForeignKey
 
 class Category(MPTTModel):
     title = models.CharField(max_length=255)
-    slug = models.SlugField(max_length=255)
     parent = TreeForeignKey(
         'self',
         on_delete=models.CASCADE,
@@ -46,10 +45,6 @@ class Post(models.Model):
         ('published', 'Published')
     )
     title = models.CharField(max_length=250)
-    slug = models.SlugField(
-        max_length=250,
-        unique_for_date='publish'
-    )
     author = models.ForeignKey(
         User,
         related_name='blog_posts',
@@ -61,22 +56,22 @@ class Post(models.Model):
         on_delete=models.SET_NULL,
         null=True
     )
-    #image = models.ImageField(
-       # upload_to='articles/',
-       # verbose_name='Изображение'
-    #)
+    image = models.ImageField(upload_to='catalog/image_of_post')
     tags = models.ManyToManyField(
         Tag,
         related_name='post',
     )
     body = models.TextField()
     publish = models.DateTimeField(default=timezone.now)
-    created = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='Дата создания'
+    )
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(
         max_length=10,
         choices=STATUS_CHOICES,
-        default='draft'
+        default=''
     )
 
     class Meta:
@@ -93,14 +88,14 @@ class Product(models.Model):
         max_length=255,
         verbose_name='Название товара'
     )
-   # image = models.ImageField(
-   #     upload_to='articles/',
-    #    verbose_name='Изображение'
-    #)
+    image = models.ImageField(
+        upload_to='catalog/image_of_product',
+        verbose_name='Изображение'
+    )
     price = models.DecimalField(
         decimal_places=2,
-        max_digits=10
-    )#
+        max_digits=10,
+    )
     body = models.TextField()
 
     class Meta:
@@ -109,7 +104,7 @@ class Product(models.Model):
         db_table = 'product'
 
     def __str__(self):
-        return self.title
+        return str(self.title) + ": ₽" + str(self.price)
 
 
 class Comment(models.Model):
@@ -121,3 +116,9 @@ class Comment(models.Model):
         related_name='comment',
         on_delete=models.CASCADE
     )
+
+    class Meta:
+        verbose_name = 'Комментарий'
+        verbose_name_plural = 'Комментарии'
+
+
