@@ -56,7 +56,7 @@ class Post(models.Model):
         on_delete=models.SET_NULL,
         null=True
     )
-    image = models.ImageField(upload_to='catalog/image_of_post')
+    #image = models.ImageField(upload_to='catalog/image_of_post')
     tags = models.ManyToManyField(
         Tag,
         related_name='post',
@@ -88,10 +88,10 @@ class Product(models.Model):
         max_length=255,
         verbose_name='Название товара'
     )
-    image = models.ImageField(
-        upload_to='catalog/image_of_product',
-        verbose_name='Изображение'
-    )
+    #image = models.ImageField(
+    #    upload_to='catalog/image_of_product',
+    #    verbose_name='Изображение'
+    #)
     price = models.DecimalField(
         decimal_places=2,
         max_digits=10,

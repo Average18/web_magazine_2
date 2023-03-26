@@ -1378,7 +1378,7 @@ li.megamenu-img a {
   transform: scale(0.6);
 }
 .l_sale {
-  background: rgba(0, 0, 0, 0) url("img/icon/bg-l-sale.png") no-repeat scroll right center;
+  background: rgba(0, 0, 0, 0) url("../img/icon/bg-l-sale.png") no-repeat scroll right center;
   bottom: 20px;
   color: #e62e04;
   font-size: 20px;
@@ -1946,7 +1946,7 @@ li.megamenu-img a {
   padding-left: 0;
   position: static;
   transform: scale(1);
-}}
+}
 .hot-product2 .actions-primary a {
   transform: scale(1);
   width: 163px;
@@ -2791,10 +2791,10 @@ li.megamenu-img a {
 }
 
 .category-menu.v-cat-menu ul li.has-sub > a {
-  background: rgba(0, 0, 0, 0) url("img/vertical-menu/icon-expand.png") no-repeat scroll 20px 9px;
+  background: rgba(0, 0, 0, 0) url("../img/vertical-menu/icon-expand.png") no-repeat scroll 20px 9px;
 }
 .category-menu.v-cat-menu .has-sub.open > a{
-    background: rgba(0, 0, 0, 0) url("img/vertical-menu/icon-collapse.png") no-repeat scroll 20px 9px;  
+    background: rgba(0, 0, 0, 0) url("../img/vertical-menu/icon-collapse.png") no-repeat scroll 20px 9px;
 }
 /*img/vertical-menu/icon-expand.png*/
 .category-menu.v-cat-menu ul li.has-sub > a::after {
